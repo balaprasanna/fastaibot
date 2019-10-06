@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, make_response
+from fastai import *
 from fastai.vision import *
 app = Flask(__name__)
 
@@ -11,7 +12,7 @@ def main():
 
 @app.route("/dummy", methods=["GET"])
 def dummy():
-    path = untar_data(MNIST_PATH)
+    path = untar_data(URLS.MNIST_PATH)
     data = image_data_from_folder(path)
     learn = cnn_learner(data, models.resnet18, metrics=accuracy)
     learn.fit(1)
