@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, make_response
-from fastai import *
+from fastai.core import *
 from fastai.vision import *
 app = Flask(__name__)
 
