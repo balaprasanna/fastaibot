@@ -37,6 +37,7 @@ def restart():
 def run_in_term(command):
     with open("/tmp/subprocessout.txt", "w") as f:
         out = subprocess.call( command.split() , shell=True, stdout=f)
+        print(out)
         if out != 0 :
             raise Exception("Non zero exit...")
     return open("/tmp/subprocessout.txt", "r").read()
