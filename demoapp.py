@@ -24,7 +24,13 @@ def dummy():
     with redirect_stdout(f):
         learn.fit(1)
     out = f.getvalue()
-    
+    print(out)
     return out
+
+
+@app.route("/restart", methods=["GET"])
+def restart():
+    import subprocess
+    pass
 
 app.run('0.0.0.0', port=9000)
