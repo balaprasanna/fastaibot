@@ -4,6 +4,7 @@ from fastai.vision import *
 from fastai.metrics import error_rate
 import io
 from contextlib import redirect_stdout
+import subprocess
 
 app = Flask(__name__)
 
@@ -28,9 +29,16 @@ def dummy():
     return out
 
 
-@app.route("/restart", methods=["GET"])
+@app.route("/pull", methods=["GET"])
 def restart():
-    import subprocess
-    pass
+    print( run_in_term( "git pull" ) )
+
+
+def run_in_term(command):
+    with open("/tmp/subprocessout.txt", "w") as f:
+        out = subprocess.call( command.split() , shell=True, stdout=f)
+        if out != 0 :
+            raise Exception("Non zero exit...")
+    return open("/tmp/subprocessout.txt", "r").read()
 
 app.run('0.0.0.0', port=9000)
