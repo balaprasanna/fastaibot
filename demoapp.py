@@ -13,7 +13,7 @@ def main():
 
 @app.route("/dummy", methods=["GET"])
 def dummy():
-    path = untar_data(URLs.MNIST_PATH)
+    path = untar_data(URLs.MNIST_TINY)
     data = image_data_from_folder(path)
     learn = cnn_learner(data, models.resnet18, metrics=accuracy)
     learn.fit(1)
